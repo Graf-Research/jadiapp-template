@@ -1,0 +1,7 @@
+services:
+  wbmock:
+    build: .
+    container_name: wbmock
+    ports:
+      - "3000:9999"
+    restart: always
