@@ -38,7 +38,7 @@ async function main() {
   app.use('/api', api_router);
 
   for (const endpoint of list_endpoint.reverse()) {
-    api_router[endpoint.__http_method](endpoint.__http_path, async (req: Request, res: Response) => {
+    api_router[endpoint.__http_method.toLocaleLowerCase()](endpoint.__http_path, async (req: Request, res: Response) => {
       const headers = req.headers;
       const body = req.body;
       const paths = req.params;
