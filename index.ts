@@ -35,7 +35,7 @@ async function main() {
 
   app.use(express.json({ limit: '50mb' }));
   app.use('/', express.static(path.join(cwd(), 'web')));
-  app.use('/api', api_router);
+  app.use('/__api__', api_router);
 
   for (const endpoint of list_endpoint.reverse()) {
     api_router[endpoint.__http_method.toLocaleLowerCase()](endpoint.__http_path, async (req: Request, res: Response) => {
