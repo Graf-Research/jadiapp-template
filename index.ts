@@ -53,6 +53,19 @@ async function main() {
     });
     console.log(`API added: ${endpoint.__http_method} ${endpoint.__http_path}`);
   }
+
+  app.use((req, res, next) => {
+    if (req.method !== 'GET') return next();
+
+    if (req.path.startsWith('/api')) {
+      res.sendStatus(404);
+      return;
+    }
+
+    res.sendFile(path.join(cwd(), 'web/index.html'), err => {
+      if (err) next(err);
+    });
+  });
   
   const port = +(process.env.PORT ?? '18888');
   app.listen(port, () => {
